@@ -1,0 +1,19 @@
+- name: Install Nginx and server static website
+  hosts: server_1 ansible_host=13.234.186.73
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy webpage
+      copy:
+        src: index.html 
+        dest: /var/www/html/ 
